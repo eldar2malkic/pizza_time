@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center p-3">Select Your Favourite Pizza</h1>
+<div class="container">
+    <table class="table mt-4 ">
+        <thead>
+          <tr>
+            
+            <th scope="col">Size</th>
+            <th scope="col">Crust</th>
+            <th scope="col">Toppings</th>
+            <th scope="col">Add to Fav</th>
+          </tr>
+        </thead>
+        {%for i in range(items|length):%}
+        
+        <tbody>
+          <tr>
+            
+            <td>{{items[i]['size']}}</td>
+            <td>{{items[i]['crust']}}</td>
+            <td>{{items[i]['topping']}}</td>
+            
+            {%if not fav['order_id'] == items[i]['id']:%}
+            <td><a href="/add_to_fav/{{items[i].id}}">Add</a></td>
+            {%endif%}
+            
+            
+          </tr>
+        {%endfor%}
+        
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center mt-2">Check Out</h1>
+
+<div class="container">
+    <table class="table ">
+        <thead>
+          <tr>
+            
+            <th scope="col">Size</th>
+            <th scope="col">Crust</th>
+            <th scope="col">Delivery Method</th>
+            <th scope="col">Toppings</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        {%for i in range(items|length):%}
+        <tbody>
+          <tr>
+            
+            <td>{{items[i]['size']}}</td>
+            <td>{{items[i]['crust']}}</td>
+            <td>{{items[i]['method']}}</td>
+            <td>{{items[i]['topping']}}</td>
+            <td>{{items[i]['quantity']}}</td>
+            <td>$ {{price[i]}}</td>
+            <td><a href="/edit/{{items[i].id}}">edit</a> | <a href="/delete/cart_item/{{items[i]['id']}}">delete</a></td>
+          </tr>
+        {%endfor%}
+        </tbody>
+      </table>
+</div>
+<div class="container">
+    <div class="row d-flex mr-0">
+        <div class="col-8"></div>
+        <div class="col-2">
+          <a href="/new/order" class="btn btn-primary text-light p-2 mr-0">Continue Order</a>
+        </div>
+        <div class="col-2">
+            <a href="/checkout/order" class="btn btn-success text-light p-2 mr-0">Purchase</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="container">
+    <h1 class="text-center font-weight-bold col-8 m-auto" style="width: 400px;">Quick Options</h1>
+    <div class="col-10 mx-auto d-flex justify-content-around">
+        <div>
+            <a href="/new/order"><img class="rounded p-2" src="{{url_for('static', filename='/img/make_pizza.jpeg')}}" width="400px" height="250px"></a>
+            <p class="p-2">FEXE's pizza offers new taste of homemade pizza, 
+                <br>
+                created by original French recipe. 
+                <br>
+                Try to order only one. </p>
+        </div>
+
+        <div>
+            <a href="/favourite"><img class="rounded p-2" src="{{url_for('static', filename='/img/fav_pizza.webp')}}" width="400px" height="250px"></a>
+
+            <p class="p-2">Order your favorite pizza</p>
+        </div>
+
+        <div>
+            <a href="/specials"><img class="rounded p-2" src="{{url_for('static', filename='/img/surprise.jpeg')}}" width="400px" height="250px"></a>
+
+            <p class="p-2">Order todays special, suggestion of chef Fexe</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

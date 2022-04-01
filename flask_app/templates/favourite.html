@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container row d-flex justify-content-around mt-2">
+  <h1> Your Favourite Pizza </h1>
+</div>
+<div class="container">
+    <table class="table mt-4 ">
+        <thead>
+          <tr>
+            
+            <th scope="col">Size</th>
+            <th scope="col">Crust</th>
+            <th scope="col">Toppings</th>
+            <th scope='col'>Action</th>
+          </tr>
+        </thead>
+        {%for i in range(items|length):%}
+        {%for one in fav:%}
+            {%if one['order_id'] == items[i]['id']:%}
+        <tbody>
+          <tr>
+            
+            <td>{{items[i]['size']}}</td>
+            <td>{{items[i]['crust']}}</td>
+            <td>{{items[i]['topping']}}</td>
+            <td><a href="/order_again/{{items[i]['id']}}" class="btn btn-primary text-light">Order Again</a></td>
+          </tr>
+            {%endif%}
+            {%endfor%}
+          
+        {%endfor%}
+        </tbody>
+      </table>
+</div>
+{% endblock %}

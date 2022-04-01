@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center font-weight-bold col-8 m-auto" style="width: 400px;">CRAFT-A-PIZZA</h1>
+<form action="/update/{{edit_cart.id}}" method="post" class="col-8 p-4 my-4 mx-auto">
+        
+        <div>
+            <p class="mx-2 px-auto form-group" for="method">Method:</p>
+            <select name="method" class="mx-auto py-auto form-control">
+                {% if edit_cart.method == "CarryOut" %}
+                <option class="text-uppercase" selected>CarryOut</option>
+                <option class="text-uppercase">Delivery</option>
+                <option class="text-uppercase">Dine-in</option>
+                {% elif edit_cart.method == "Delivery" %}
+                <option class="text-uppercase" >CarryOut</option>
+                <option class="text-uppercase" selected>Delivery</option>
+                <option class="text-uppercase">Dine-in</option>
+                {% elif edit_cart.method == "Dine-in" %}
+                <option class="text-uppercase" >CarryOut</option>
+                <option class="text-uppercase" >Delivery</option>
+                <option class="text-uppercase" selected>Dine-in</option>
+                {% endif %}
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-around mt-3 py-auto">
+            <p class="mx-2 px-auto form-group" for="size">Size:</p>
+            <select name="size" class="mx-auto form-control">
+                {% if edit_cart.size == "SMALL" %}
+                <option class="text-uppercase" selected>SMALL</option>
+                <option class="text-uppercase">MEDIUM</option>
+                <option class="text-uppercase">LARGE</option>
+                <option class="text-uppercase">Extra-large</option>
+                {% elif edit_cart.size == "MEDIUM" %}
+                <option class="text-uppercase" >SMALL</option>
+                <option class="text-uppercase" selected>MEDIUM</option>
+                <option class="text-uppercase">LARGE</option>
+                <option class="text-uppercase">Extra-large</option>
+                {% elif edit_cart.size == "LARGE" %}
+                <option class="text-uppercase" >SMALL</option>
+                <option class="text-uppercase" >MEDIUM</option>
+                <option class="text-uppercase" selected>LARGE</option>
+                <option class="text-uppercase">Extra-large</option>
+                {% elif edit_cart.size == "Extra-large" %}
+                <option class="text-uppercase" >SMALL</option>
+                <option class="text-uppercase" >MEDIUM</option>
+                <option class="text-uppercase" >LARGE</option>
+                <option class="text-uppercase" selected>Extra-large</option>
+                {% endif %}
+            </select>
+
+            <p class="mx-2 px-auto form-group" for="crust">CRUST:</p>
+            <select name="crust" class="mx-auto form-control">
+                {% if edit_cart.crust == "Thin Crust" %}
+                <option class="text-uppercase" selected>Thin Crust</option>
+                <option class="text-uppercase">Thick Crust</option>
+                {% elif edit_cart.crust == "Thick Crust" %}
+                <option class="text-uppercase" >Thin Crust</option>
+                <option class="text-uppercase" selected>Thick Crust</option>
+                {% endif %}
+            </select>
+
+            <p class="mx-2 px-auto form-group" for="quantity">Qty:</p>
+            <select name="quantity" class="mx-auto px-auto form-control">
+                {% for i in range(1,11) %}
+                    {% if edit_cart.quantity == i %}
+                        <option selected>{{i}}</option>
+                    {% endif %}
+                    <option>{{i}}</option>
+                {% endfor %}
+                <!-- <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option> -->
+            </select>
+        </div>
+        <h6>Toppings:</h6>
+        <!-- making a row to divide and display topping into two columns side by side -->
+
+        <!-- toppingsList = edit_cart.topping.split() -->
+        <div class="row">
+            <div class="col-6">  <!--first columnn-->
+                <div class="form-check">
+                    {% if "cheese" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="cheese" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="cheese">
+                      Cheese
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="cheese" id="flexCheckDefault" >
+                    <label class="form-check-label" for="cheese">
+                      Cheese
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {% if "mushroom" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="mushroom" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="mushroom" >
+                      Mushroom
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="mushroom" id="flexCheckDefault" >
+                    <label class="form-check-label" for="mushroom" >
+                      Mushroom
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {% if "pepperoni" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="pepperoni" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="pepperoni">
+                      Pepperoni
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="pepperoni" id="flexCheckDefault" >
+                    <label class="form-check-label" for="pepperoni">
+                      Pepperoni
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {% if "sausage" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="sausage" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="sausage">
+                      Sausage
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="sausage" id="flexCheckDefault">
+                    <label class="form-check-label" for="sausage">
+                      Sausage
+                    </label>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-6"> <!--second columnn-->
+                <div class="form-check">
+                    {% if "onion" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="onion" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="onion">
+                      Onion
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="onion" id="flexCheckDefault">
+                    <label class="form-check-label" for="onion">
+                      Onion
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {% if "olives" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="olives" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="olives">
+                      Olives
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="olives" id="flexCheckDefault">
+                    <label class="form-check-label" for="olives">
+                      Olives
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {% if "green_pepper" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="green_pepper" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="green_pepper">
+                      Pepper
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="green_pepper" id="flexCheckDefault">
+                    <label class="form-check-label" for="green_pepper">
+                      Pepper
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {% if "garlic" in edit_cart.topping.split() %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="garlic" id="flexCheckDefault" checked>
+                    <label class="form-check-label" for="garlic">
+                      Garlic
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="topping" value="garlic" id="flexCheckDefault">
+                    <label class="form-check-label" for="garlic">
+                      Garlic
+                    </label>
+                    {% endif %}
+                </div>
+            </div>
+        </div> <!--end of toppings row-->
+    <br>
+        <input type="submit" value="Edit Order" class="btn btn-primary">
+        
+</form>
+{% endblock %}
